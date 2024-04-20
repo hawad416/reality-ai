@@ -1,6 +1,8 @@
 """
 Analyzer the sentiments within a video, potentially classifying as
-positive, negative, toxic, concerning etc
+positive, negative, toxic, concerning etc.
+
+Why isnt this showing up!
 """
 
 def analyze_attitudes(self):

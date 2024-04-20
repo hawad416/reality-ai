@@ -13,7 +13,7 @@ from langchain.memory import ConversationBufferMemory
 
 
 """
-Extracts & cleans up transcipt from a youtube video.
+Extracts & cleans up transcipt from a youtube video.?
 """
 
 class TranscriptAnalyzer:

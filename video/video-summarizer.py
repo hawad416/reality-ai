@@ -8,6 +8,8 @@ from langchain.memory import ConversationBufferMemory
 from langchain_community.chat_models import ChatOpenAI
 from transcript_extractor import TranscriptAnalyzer
 
+#hello
+
 class VideoSummarizer:
     def __init__(self, transcript):
         self.transcript = transcript
