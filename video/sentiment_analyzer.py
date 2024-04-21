@@ -82,8 +82,8 @@ def justify_problems(summary):
         agent_prompt = dedent("""   
                                 Given the JSON, provide a summary for a parent about the key problems in their childs media consumption providing the justification and where the problem was found. 
                                 You are given the json of the problems that were identified in the childs watch history.
-                                Provide a summary to the parent in a natural way as if you are a teacher concerned with the child. Don't inlclude numbers and bulllets, just paragraphs that flow well.
-                                Be sure to also let the parent know about potential impacts the problematic content can have on the child as they develop adn what discussions the parents should have with the kid. 
+                                Provide a summary to the parent in a natural way as if you are a teacher concerned with the child. Don't inlclude numbers and bulllets or greetings, just present the information to the parent in paragraphs that flow well.
+                                Be sure to also let the parent know about potential impacts the problematic content can have on the child and prepare some discussion topics and specific questions the parent can talk to with their child
                                 """
                             
                         )
