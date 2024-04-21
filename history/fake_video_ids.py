@@ -5,8 +5,10 @@ def get_fake_suicide_vids():
     return [
         "1Yq6W7YAHM4",
         "wHi726FuClM",
+         "o5pUCdKQ1m0",
         "slKL5QwurAg",
         "EJ_S5Rjt_iI",
+        "t_mGvTXTFMU",
     ]
 
 
@@ -15,10 +17,10 @@ def get_fake_eating_disorder_vids():
     Return a list of fake YouTube video IDs.
     """
     return [
-        "o5pUCdKQ1m0",
-        "t_mGvTXTFMU",
-        "djp136_Fn40",
-        "qb-3iLsuNbc",
+        #  "o5pUCdKQ1m0",
+        #  "t_mGvTXTFMU",
+        # "djp136_Fn40",
+        # "qb-3iLsuNbc",
     ]
 
 def get_fake_terrorism_vids():

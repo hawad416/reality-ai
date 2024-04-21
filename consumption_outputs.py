@@ -84,7 +84,7 @@ class ConsumptionOutput:
                 
                 # Create a detailed recommendation including video ID, concerning themes, attitude, and summary
                 recommendation = (
-                    f"Video ID: {video_id}\n"
+                    f"Video ID: {video_id}\n\n"
                     f"Concerning Themes: {themes_str}\n"
                     f"Attitude: {attitude}\n"
                     f"Flagged: {justify_problems(key_themes)}\n"
