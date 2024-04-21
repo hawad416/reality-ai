@@ -1,6 +1,6 @@
 from history.fake_video_ids import get_fake_eating_disorder_vids, get_fake_suicide_vids, get_fake_terrorism_vids
 from video.transcript_extractor import TranscriptAnalyzer
-from video.sentiment_analyzer import analyze_attitudes, analyze_themes
+from video.sentiment_analyzer import analyze_attitudes, analyze_themes, justify_problems
 from typing import List, Dict, Any
 
 class ConsumptionOutput:
@@ -36,27 +36,63 @@ class ConsumptionOutput:
                 "key_themes": key_themes
             }
 
-    def generate_recommendations(self):
+   
+    def generate_parental_recommendations(self) -> List[str]:
         """
-        Generate recommendations based on analysis results.
+        Generate parental recommendations based on analysis results.
+        
+        Parameters:
+        analysis_results (dict): A dictionary where keys are video IDs and values are dictionaries with
+                                'summary', 'attitude', and 'key_themes' as keys.
+        
+        Returns:
+        list: A list of recommendations for the parent, indicating which videos require attention and why.
         """
         recommendations = []
         
-        # For demonstration purposes, the recommendations could be based on specific key themes or attitudes
-        for video_id, analysis in self.analysis_results.items():
-            key_themes = analysis["key_themes"]
-            attitude = analysis["attitude"]
-
-            recommendations.append((video_id, "Consider watching less of this content for your well-being."))
-
-            
-            # this is just a placeholder for now until i can use the analysis to generate recs.
-            # # Generate recommendations based on the analysis results
-            # if "suicide" in key_themes or attitude == "Negative":
-            #     recommendations.append((video_id, "Consider watching less of this content for your well-being."))
-            
-            # Add more recommendation rules here as needed
+        # Define a list of key themes that could be concerning
+        concerning_themes = [
+            "sexually explicit material",
+            "false or misleading information",
+            "violence",
+            "extremism or terrorism",
+            "hateful or offensive material",
+            "profanity or vulgar language",
+            "illegal activities",
+            "harmful behaviors",
+            "gambling",
+            "unmoderated chat rooms",
+            "misrepresentation or discrimination"
+        ]
         
+        # Iterate through analysis results
+        for video_id, analysis in self.get_analysis_results().items():
+            # Check if any concerning themes are present in the analysis results
+            key_themes = analysis.get("key_themes", [])
+        
+            # Check which concerning themes are present in the key themes
+            themes_found = [theme for theme in concerning_themes if theme in key_themes]
+            
+            # If any concerning themes are found, generate a recommendation for the parent
+            if themes_found:
+                # Convert the list of found themes into a string
+                themes_str = ', '.join(themes_found)
+                
+                # Retrieve other information such as attitude and summary
+                attitude = analysis.get("attitude", "")
+                summary = analysis.get("summary", "")
+                
+                # Create a detailed recommendation including video ID, concerning themes, attitude, and summary
+                recommendation = (
+                    f"Video ID: {video_id}\n"
+                    f"Concerning Themes: {themes_str}\n"
+                    f"Attitude: {attitude}\n"
+                    f"Flagged: {justify_problems(key_themes)}\n"
+                )
+                
+                recommendations.append(recommendation)
+        
+        print(recommendations)
         return recommendations
 
     def get_analysis_results(self):
@@ -76,7 +112,7 @@ class ConsumptionOutput:
         self.analyze_videos(video_ids)
         
         # Generate recommendations
-        recommendations = self.generate_recommendations()
+        recommendations = self.generate_parental_recommendations()
         
         # Return the analysis results and recommendations
         return self.analysis_results, recommendations
@@ -85,11 +121,15 @@ class ConsumptionOutput:
 if __name__ == "__main__":
     consumption_output = ConsumptionOutput()
     results, recommendations = consumption_output.run_analysis()
+
+    print(recommendations)
     
     print("Analysis Results:")
-    print(results)
+    #print(results)
     
     # recommendations are going to be displayed to the parent. 
     print("\nRecommendations:")
-    for video_id, recommendation in recommendations:
-        print(f"Video ID: {video_id}, Recommendation: {recommendation}")
+    for recommendation in recommendations:
+        print(recommendation)
+
+    

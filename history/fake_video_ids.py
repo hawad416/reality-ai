@@ -26,8 +26,8 @@ def get_fake_terrorism_vids():
     Return a list of fake YouTube video IDs.
     """
     return [
-        "aM3ElTvF52I",
-        "wpU5Hb5j01Q",
-        "qb33GLJKrEE",
-        "QMdewXx2OBQ",
+        # "aM3ElTvF52I",
+        # "wpU5Hb5j01Q",
+        # "qb33GLJKrEE",
+        # "QMdewXx2OBQ",
     ]
